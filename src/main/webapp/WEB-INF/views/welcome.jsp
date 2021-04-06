@@ -16,6 +16,13 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 	<div class="jumbotron">
 		<h1>${greeting}</h1>
 		<p>${tagline}</p>
+		<ul>
+			<li><a href="customers/">고객 목록</a></li>
+			<li><span><a href="market/products/">상품 목록</a></span>(<span><a
+					href="market/products/laptop">랩탑</a></span>,&nbsp;<span><a
+					href="market/products/TABLET">태블릿</a></span>)</li>
+			<li><a href="market/update/stock/">제고 증가</a></li>
+		</ul>
 	</div>
 </body>
 </html>
