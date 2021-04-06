@@ -18,6 +18,11 @@
 			</div>
 		</div>
 	</section>
+
+	<section class="container">
+		<a href="/webstore">홈으로</a>
+		<hr>
+	</section>
 	<section class="container">
 		<div class="row">
 			<c:forEach items="${products}" var="product">
