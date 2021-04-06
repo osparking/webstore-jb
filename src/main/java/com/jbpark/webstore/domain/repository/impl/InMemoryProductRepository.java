@@ -20,14 +20,29 @@ public class InMemoryProductRepository implements ProductRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
-	@Override
-	public List<Product> getAllProducts() {
+	public void updateStock(String productId, long noOfUnits) {
+		String SQL = "UPDATE PRODUCTS SET " + "UNITS_IN_STOCK = :unitsInStock WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
-		List<Product> result = jdbcTemplate.query("SELECT * FROM products", params, new ProductMapper());
-		return result;
+		params.put("unitsInStock", noOfUnits);
+		params.put("id", productId);
+		jdbcTemplate.update(SQL, params);
 	}
 
-	private	static final class ProductMapper implements RowMapper<Product> {
+	@Override
+	public List<Product> getAllProducts(String... args) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String query = "SELECT * FROM products";
+
+		if (args.length == 1) {
+			query += " WHERE LCASE(CATEGORY) = :category";
+			params.put("category", args[0]);
+		}
+		List<Product> result = jdbcTemplate.query(query, params, new ProductMapper());
+		return result;
+
+	}
+
+	private static final class ProductMapper implements RowMapper<Product> {
 		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Product product = new Product();
 			product.setProductId(rs.getString("ID"));
@@ -42,5 +57,13 @@ public class InMemoryProductRepository implements ProductRepository {
 			product.setDiscontinued(rs.getBoolean("DISCONTINUED"));
 			return product;
 		}
+	}
+
+	@Override
+	public List<Product> getProductsByCategory(String category) {
+		String SQL = "SELECT * FROM PRODUCTS " + "WHERE LCASE(CATEGORY) = :category";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("category", category.toLowerCase());
+		return jdbcTemplate.query(SQL, params, new ProductMapper());
 	}
 }
