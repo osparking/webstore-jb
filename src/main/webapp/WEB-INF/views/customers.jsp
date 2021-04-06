@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,27 +8,27 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>상품</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>상품 목록</h1>
-				<p>All the available products in our store</p>
+				<h1>고객 목록</h1>
+				<p>모든 고객 목록</p>
 			</div>
 		</div>
 	</section>
 	<section class="container">
 		<div class="row">
-			<c:forEach items="${products}" var="product">
+			<c:forEach items="${customers}" var="customer">
 				<div class="col-sm-6 col-md-3">
 					<div class="thumbnail">
 						<div class="caption">
-							<h3>${product.name}</h3>
-							<p>${product.description}</p>
-							<p>₩${product.unitPriceStr}</p>
-							<p>제고 수량 : ${product.unitsInStockStr}</p>
+							<h3>${customer.name}</h3>
+							<p>${customer.address}</p>
+							<p>${customer.customerId}</p>
+							<p>주문 건수 : ${customer.noOfOrdersMade}</p>
 						</div>
 					</div>
 				</div>

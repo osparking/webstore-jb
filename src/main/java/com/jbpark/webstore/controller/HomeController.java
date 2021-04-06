@@ -5,11 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
-	@RequestMapping("/welcome")
+	@RequestMapping
 	public String welcome(Model model) {
-		model.addAttribute("greeting", "È¯¿µÇÕ´Ï´Ù!");
-		model.addAttribute("tagline", "¼¼»ó¿¡¼­ ÇÏ³ª »ÓÀÎ À¥ °¡°Ô");
+		model.addAttribute("greeting", "ì•ˆë…•");
+		model.addAttribute("tagline", "ì›¹ìŠ¤íŠ¸ì–´");
 		return "welcome";
 	}
 }

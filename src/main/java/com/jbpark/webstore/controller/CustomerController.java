@@ -5,17 +5,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jbpark.webstore.domain.repository.ProductRepository;
+import com.jbpark.webstore.service.CustomerService;
 
-@RequestMapping("market")
 @Controller
-public class ProductController {
+public class CustomerController {
 	@Autowired
-	private ProductRepository productRepository;
-	
-	@RequestMapping("/products")
+	private CustomerService customerService;
+
+	@RequestMapping("/customers")
 	public String list(Model model) {
-		model.addAttribute("products", productRepository.getAllProducts()); 
-		return "products";
+		model.addAttribute("customers", customerService.getAllCustomers());
+		return "customers";
 	}
 }
