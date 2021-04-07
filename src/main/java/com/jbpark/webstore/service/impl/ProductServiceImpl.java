@@ -58,4 +58,9 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.getProdsByMultiFilter(productCategory, price, brand);
 	}
 
+	@Override
+	public void addProduct(Product product) {
+		productRepository.addProduct(product);
+	}
+
 }
