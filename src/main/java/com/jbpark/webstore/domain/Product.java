@@ -68,6 +68,8 @@ public class Product implements Serializable {
 
 	public void setUnitPrice(BigDecimal unitPrice) {
 		this.unitPrice = unitPrice;
+		if (unitPrice == null)
+			unitPrice = new BigDecimal(0);
 		DecimalFormat df = new DecimalFormat("#,###");
 		this.unitPriceStr = df.format(unitPrice);
 	}
