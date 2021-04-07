@@ -68,6 +68,17 @@ public class InMemoryProductRepository implements ProductRepository {
 	}
 
 	@Override
+	public List<Product> getProdsByMultiFilter(String productCategory, 
+			Map<String, String> criteria, String brand) {
+		String SQL = "SELECT * FROM PRODUCTS WHERE CATEGORY = :category " 
+				+ "AND MANUFACTURER = :brand "
+				+ "AND UNIT_PRICE >= :low And UNIT_PRICE <= :high";
+		criteria.put("category", productCategory); // **
+		criteria.put("brand", brand);
+		return jdbcTemplate.query(SQL, criteria, new ProductMapper());
+	}
+
+	@Override
 	public List<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
 		String SQL = "SELECT * FROM PRODUCTS WHERE CATEGORY " + "IN (:categories) AND MANUFACTURER IN (:brands)";
 		return jdbcTemplate.query(SQL, filterParams, new ProductMapper());
