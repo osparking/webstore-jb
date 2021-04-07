@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.jbpark.webstore.domain.Product;
@@ -59,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void addProduct(Product product) {
+	public void addProduct(Product product) throws DataAccessException {
 		productRepository.addProduct(product);
 	}
 

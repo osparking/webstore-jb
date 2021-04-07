@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,15 +34,21 @@ public class ProductController {
 	@RequestMapping(value = "/products/add", method = RequestMethod.POST,
 			produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
 	public String processAddNewProductForm(@ModelAttribute("newProduct") 
-			Product newProduct, BindingResult result) {
+			Product newProduct, BindingResult result, Model model) {
 		String[] suppressedFields = result.getSuppressedFields();
 		if (suppressedFields.length > 0) {
 			throw new RuntimeException("Attempting to bind disallowed fields: "
 					+ StringUtils.arrayToCommaDelimitedString(suppressedFields));
 		}
-
-		productService.addProduct(newProduct);
-		return "redirect:/market/products";
+		try {
+			productService.addProduct(newProduct);
+			return "redirect:/market/products";
+		} catch (DataAccessException e) {
+			String msg = e.getMessage();
+			int idx = msg.lastIndexOf("Duplicate");
+			model.addAttribute("errorMsg", msg.substring(idx));
+			return "addProduct";
+		}
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습
