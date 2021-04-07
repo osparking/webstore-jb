@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -29,7 +30,8 @@ public class ProductController {
 		return "addProduct";
 	}
 
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/products/add", method = RequestMethod.POST,
+			produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
 	public String processAddNewProductForm(@ModelAttribute("newProduct") 
 			Product newProduct, BindingResult result) {
 		String[] suppressedFields = result.getSuppressedFields();

@@ -94,8 +94,8 @@ public class MariaProductRepository implements ProductRepository {
 
 	@Override
 	public void addProduct(Product product) {
-		String SQL = "INSERT INTO PRODUCTS (ID, " + "NAME," + "DESCRIPTION," + "UNIT_PRICE," + "MANUFACTURER,"
-				+ "CATEGORY," + "CONDITION," + "UNITS_IN_STOCK," + "UNITS_IN_ORDER," + "DISCONTINUED) "
+		String SQL = "INSERT INTO PRODUCTS (ID, " + "PROD_NAME," + "DESCRIPTION," + "UNIT_PRICE," + "MANUFACTURER,"
+				+ "CATEGORY," + "PROD_CONDITION," + "UNITS_IN_STOCK," + "UNITS_IN_ORDER," + "DISCONTINUED) "
 				+ "VALUES (:id, :name, :desc, :price, :manufacturer, :category, "
 				+ ":condition, :inStock, :inOrder, :discontinued)";
 		Map<String, Object> params = new HashMap<String, Object>();
