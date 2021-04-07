@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jbpark.webstore.service.ProductService;
 
@@ -22,8 +23,7 @@ public class ProductController {
 	 */
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습
-	public String getProductsByFilter(
-			@MatrixVariable(pathVar = "params") Map<String, List<String>> filterParams,
+	public String getProductsByFilter(@MatrixVariable(pathVar = "params") Map<String, List<String>> filterParams,
 			Model model) {
 		model.addAttribute("products", productService.getProductsByFilter(filterParams));
 		return "products";
@@ -43,6 +43,14 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+
+	@RequestMapping("/product") // 7절 실습
+	public String getProductById(@RequestParam("id") String productId,
+			Model model) {
+		model.addAttribute("product", 
+				productService.getProductById(productId));
+		return "product";
+	}
 
 	@RequestMapping("/update/stock")
 	public String updateStock(Model model) {

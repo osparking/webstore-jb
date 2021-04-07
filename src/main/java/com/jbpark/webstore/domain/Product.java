@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 import com.jbpark.webstore.util.ValueFormat;
 
 /**
- * 웹 가게에서 판매하는 상품 클래스
+ * 
  * 
  * @author Jongbum Park
  *
