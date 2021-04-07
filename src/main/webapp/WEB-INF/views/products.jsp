@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +34,13 @@
 							<p>${product.description}</p>
 							<p>₩${product.unitPriceStr}</p>
 							<p>제고 수량 : ${product.unitsInStockStr}</p>
+							<p>
+								<a href="<spring:url value='/market/product?id=${product.productId}'/>"
+									class="btn btn-primary"> 
+									<span class="glyphicon-info-sign glyphicon" /></span>
+									상세정보
+								</a>
+							</p>
 						</div>
 					</div>
 				</div>
