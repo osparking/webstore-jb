@@ -39,7 +39,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="name">
-						상품명</label>
+						<spring:message code="addProduct.form.prodName.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
@@ -47,7 +47,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="unitPrice">
-						단위 가격</label>
+						<spring:message code="addProduct.form.unitPrice.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="unitPrice" path="unitPrice" type="text"
 							class="form:input-large" />
@@ -55,7 +55,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="manufacturer">
-						제조사</label>
+						<spring:message code="addProduct.form.manufacturer.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="manufacturer" path="manufacturer" type="text"
 							class="form:input-large" />
@@ -63,7 +63,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="category">
-						상품 범주</label>
+						<spring:message code="addProduct.form.category.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="category" path="category" type="text"
 							class="form:input-large" />
@@ -71,7 +71,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="unitsInStock">
-						재고 수량</label>
+						<spring:message code="addProduct.form.unitsInStock.label"/></label>
 					<div class="col-lg-10">
 						<form:input id="unitsInStock" path="unitsInStock" type="text"
 							class="form:input-large" />
@@ -79,23 +79,23 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="description"> 상품
-						설명</label>
+					<label class="control-label col-lg-2" for="description">
+						<spring:message code="addProduct.form.description.label"/></label>
 					<div class="col-lg-10">
 						<form:textarea id="description" path="description" rows="2" />
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-lg-2" for="condition"> 상품
-						상태</label>
+					<label class="control-label col-lg-2" for="condition">
+					<spring:message code="addProduct.form.condition.label"/></label>
 					<div class="col-lg-10">
 						<form:radiobutton path="condition" value="New" />
-						New
+						<spring:message code="addProduct.form.condition.opt1"/>
 						<form:radiobutton path="condition" value="Old" />
-						Old
+						<spring:message code="addProduct.form.condition.opt2"/>
 						<form:radiobutton path="condition" value="Refurbished" />
-						Refurbished
+						<spring:message code="addProduct.form.condition.opt3"/>
 					</div>
 				</div>
 				<div class="form-group">
