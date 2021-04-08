@@ -24,7 +24,7 @@ charset=UTF-8"
 	<ul>
 		<li><a href="market/products/filter/params;categories=Laptop,Tablet;brands=Google,Dell">
 			행렬변수(범주, 상표)</a></li>
-		<li><a href="customers/">고객 목록</a></li>
+		<li><a href="market/customers/">고객 목록</a></li>
 		<li><a href="market/customers/add">고객 추가</a></li>
 		<li><a href="market/products/add">상품 추가</a></li>
 		<li><span><a href="market/products/">상품 목록</a></span>(<span><a
