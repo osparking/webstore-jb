@@ -28,8 +28,10 @@
 				<legend>신상품 정보 입력</legend>
 				<span>${errorMsg}</span>
 				<div class="form-group">
-					<label class="control-label col-lg-2 col-lg-2" for="productId">
-						상품 ID </label>
+					<label class="control-label col-lg-2 col-lg-2"
+						for="productId"> <spring:message
+							code="addProduct.form.productId.label" />
+					</label>
 					<div class="col-lg-10">
 						<form:input id="productId" path="productId" type="text"
 							class="form:input-large" />
