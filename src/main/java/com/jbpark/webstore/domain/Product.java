@@ -33,6 +33,15 @@ public class Product implements Serializable {
 	private boolean discontinued;
 	private String condition;
 	private MultipartFile productImage;
+	private MultipartFile productManual;
+
+	public MultipartFile getProductManual() {
+		return productManual;
+	}
+
+	public void setProductManual(MultipartFile productManual) {
+		this.productManual = productManual;
+	}
 
 	public MultipartFile getProductImage() {
 		return productImage;

@@ -60,6 +60,18 @@ public class ProductController {
 						throw new RuntimeException("Product Image saving failed", e);
 					}
 				}
+				/**
+				 * 상품 설명서 메모리 내용 정한 폴더에 파일로 보관
+				 */
+				MultipartFile productManual = newProduct.getProductManual();
+				if (productManual != null && !productManual.isEmpty()) {
+					try {
+						productManual.transferTo(
+								new File(rootDirectory + "resources\\pdf\\" + newProduct.getProductId() + ".pdf"));
+					} catch (Exception e) {
+						throw new RuntimeException("상품 설명서 저장 실패", e);
+					}
+				}
 				productService.addProduct(newProduct);
 			}
 			return "redirect:/market/products";
@@ -73,8 +85,8 @@ public class ProductController {
 
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
-		binder.setAllowedFields("productId", "name", "unit*", "description", "manufacturer", 
-				"category", "condition", "productImage");
+		binder.setAllowedFields("productId", "name", "unit*", "description", "manufacturer", "category", "condition",
+				"productImage", "productManual");
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습

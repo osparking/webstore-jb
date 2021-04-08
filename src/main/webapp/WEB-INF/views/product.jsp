@@ -41,6 +41,10 @@
 					<strong>재고 수량 </strong> : ${product.unitsInStockStr}
 				</p>
 				<p>
+					<strong><a href="/webstore-jb/pdf/${product.productId}.pdf">
+							[설명서 내려받기(${product.productId}.pdf)]</a></strong>
+				</p>
+				<p>
 					<strong>상품 단가 </strong> : ${product.unitPriceStr}원
 				</p>
 				<p>
