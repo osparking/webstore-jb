@@ -15,7 +15,7 @@ import com.jbpark.webstore.domain.Customer;
 import com.jbpark.webstore.domain.repository.CustomerRepository;
 
 @Repository
-public class InMemoryCustomerRepository implements CustomerRepository {
+public class MariaCustomerRepository implements CustomerRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -36,4 +36,15 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 		}
 	}
 
+	@Override
+	public void addCustomer(Customer customer) {
+		String sql = "INSERT INTO CUSTOMERS (ID, " + "NAME, address, noOfOrdersMade) "
+				+ "VALUES (:id, :name, :address, :noOfOrdersMade)";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", customer.getCustomerId());
+		params.put("name", customer.getName());
+		params.put("address", customer.getAddress());
+		params.put("noOfOrdersMade", customer.getNoOfOrdersMade());
+		jdbcTemplate.update(sql, params);
+	}
 }
