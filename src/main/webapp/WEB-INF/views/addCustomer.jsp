@@ -25,6 +25,7 @@
 			class="form-horizontal">
 			<fieldset>
 				<legend>새 고객 정보 입력</legend>
+				<span>${errorMsg}</span>
 				<div class="form-group">
 					<label class="control-label col-lg-2 col-lg-2" for="customerId">
 						고객 ID </label>

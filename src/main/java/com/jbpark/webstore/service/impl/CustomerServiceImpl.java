@@ -3,6 +3,7 @@ package com.jbpark.webstore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.jbpark.webstore.domain.Customer;
@@ -20,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public void addCustomer(Customer customer) {
+	public void addCustomer(Customer customer) throws DataAccessException {
 		customerRepository.addCustomer(customer);
 	}
 

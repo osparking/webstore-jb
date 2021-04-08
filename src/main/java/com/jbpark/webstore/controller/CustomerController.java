@@ -1,6 +1,7 @@
 package com.jbpark.webstore.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,9 +23,17 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.POST)
-	public String processAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
-		customerService.addCustomer(newCustomer);
-		return "redirect:/market/customers";
+	public String processAddNewCustomerForm(Model model, 
+			@ModelAttribute("newCustomer") Customer newCustomer) {
+		try {
+			customerService.addCustomer(newCustomer);
+			return "redirect:/market/customers";
+		} catch (DataAccessException e) {
+			String custId = newCustomer.getCustomerId();
+			String errorMsg = "고객 ID '" + custId + "'는 사용 중입니다. 다른 ID를 선택하세요.";
+			model.addAttribute("errorMsg", errorMsg);
+			return "addCustomer";
+		}
 	}
 
 	@RequestMapping("/customers")
