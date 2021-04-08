@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.MatrixVariable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +25,7 @@ import com.jbpark.webstore.service.ProductService;
 @RequestMapping("market")
 @Controller
 public class ProductController {
-	
+
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
@@ -31,17 +33,18 @@ public class ProductController {
 		return "addProduct";
 	}
 
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST,
-			produces = MediaType.APPLICATION_JSON_VALUE + "; charset=utf-8")
-	public String processAddNewProductForm(@ModelAttribute("newProduct") 
-			Product newProduct, BindingResult result, Model model) {
-		String[] suppressedFields = result.getSuppressedFields();
-		if (suppressedFields.length > 0) {
-			throw new RuntimeException("Attempting to bind disallowed fields: "
-					+ StringUtils.arrayToCommaDelimitedString(suppressedFields));
-		}
+	@RequestMapping(value = "/products/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE
+			+ "; charset=utf-8")
+	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
+			Model model) {
 		try {
-			productService.addProduct(newProduct);
+			String[] suppressedFields = result.getSuppressedFields();
+			if (suppressedFields.length > 0) {
+				throw new RuntimeException(
+						"허용되지 않은 항목을 엮어오려고함: " + StringUtils.arrayToCommaDelimitedString(suppressedFields));
+			} else {
+				productService.addProduct(newProduct);
+			}
 			return "redirect:/market/products";
 		} catch (DataAccessException e) {
 			String msg = e.getMessage();
@@ -49,6 +52,12 @@ public class ProductController {
 			model.addAttribute("errorMsg", msg.substring(idx));
 			return "addProduct";
 		}
+	}
+
+	@InitBinder
+	public void initialiseBinder(WebDataBinder binder) {
+		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
+				"unitsInStock", "condition");
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습
@@ -74,10 +83,8 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping("/product") // 7절 실습
-	public String getProductById(@RequestParam("id") String productId,
-			Model model) {
-		model.addAttribute("product", 
-				productService.getProductById(productId));
+	public String getProductById(@RequestParam("id") String productId, Model model) {
+		model.addAttribute("product", productService.getProductById(productId));
 		return "product";
 	}
 
