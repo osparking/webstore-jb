@@ -2,8 +2,9 @@ package com.jbpark.webstore.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.jbpark.webstore.util.ValueFormat;
 
@@ -31,6 +32,15 @@ public class Product implements Serializable {
 	private long unitsInOrder;
 	private boolean discontinued;
 	private String condition;
+	private MultipartFile productImage;
+
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
+	}
 
 	public String getUnitPriceStr() {
 		return unitPriceStr;

@@ -22,6 +22,10 @@
 	<section class="container">
 		<div class="row">
 			<div class="col-md-5">
+				<img src="<c:url value='/img/${product.productId}.png'></c:url>"
+					alt="상품 사진" style="width: 100%" />
+			</div>
+			<div class="col-md-5">
 				<h3>${product.name}</h3>
 				<p>${product.description}</p>
 				<p>
@@ -37,14 +41,14 @@
 					<strong>재고 수량 </strong> : ${product.unitsInStockStr}
 				</p>
 				<p>
-					<strong>상품 단가 </strong> : ${product.unitPriceStr}원</p>
+					<strong>상품 단가 </strong> : ${product.unitPriceStr}원
+				</p>
 				<p>
 					<a href="<spring:url value='/market/products' />"
 						class="btn btn-default"> <span
-						class="glyphicon-hand-left glyphicon"></span>뒤로 가기</a> 
-					<a href="#"
-						class="btn btn-warning btn-large"> <span
-							class="glyphicon-shopping-cart glyphicon"></span>주문하기
+						class="glyphicon-hand-left glyphicon"></span>뒤로 가기
+					</a> <a href="#" class="btn btn-warning btn-large"> <span
+						class="glyphicon-shopping-cart glyphicon"></span>주문하기
 					</a>
 				</p>
 			</div>

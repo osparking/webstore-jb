@@ -17,12 +17,12 @@ public class HomeController {
 		model.addAttribute("tagline", tagline);
 		redAttrs.addFlashAttribute("greeting", greeting);
 		redAttrs.addFlashAttribute("tagline", tagline);
-		return "redirect:/welcome/greeting";
+		return "welcome";
+//		return "redirect:/welcome/greeting";
 	}
 
 	@RequestMapping("/welcome/greeting")
-	public String greeting(Model model) {
-//		model.addAttribute("tagline", "더조은학원");
+	public String greeting() {
 		return "welcome";
 	}
 }

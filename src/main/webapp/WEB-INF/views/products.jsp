@@ -27,18 +27,20 @@
 	<section class="container">
 		<div class="row">
 			<c:forEach items="${products}" var="product">
-				<div class="col-sm-6 col-md-3">
-					<div class="thumbnail">
+				<div class="col-sm-6 col-md-3" style="height:450px">
+					<div class="thumbnail" style="height:100%">
+						<img src="<c:url value='/img/${product.productId}.png'></c:url>"
+							alt="상품 사진" style="width: 100%" />
 						<div class="caption">
 							<h3>${product.name}</h3>
 							<p>${product.description}</p>
 							<p>₩${product.unitPriceStr}</p>
 							<p>제고 수량 : ${product.unitsInStockStr}</p>
 							<p>
-								<a href="<spring:url value='/market/product?id=${product.productId}'/>"
-									class="btn btn-primary"> 
-									<span class="glyphicon-info-sign glyphicon" /></span>
-									상세정보
+								<a
+									href="<spring:url value='/market/product?id=${product.productId}'/>"
+									class="btn btn-primary"> <span
+									class="glyphicon-info-sign glyphicon" /></span> 상세정보
 								</a>
 							</p>
 						</div>
