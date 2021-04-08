@@ -56,8 +56,8 @@ public class ProductController {
 
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
-		binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer", "category",
-				"unitsInStock", "condition");
+		binder.setAllowedFields("productId", "name", "unit*", "description", "manufacturer", "category"
+				, "condition");
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습
