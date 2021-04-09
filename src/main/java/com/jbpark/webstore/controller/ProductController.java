@@ -33,7 +33,11 @@ import com.jbpark.webstore.service.ProductService;
 @RequestMapping("market")
 @Controller
 public class ProductController {
-
+	@RequestMapping("/products/invalidPromoCode")
+	public String invalidPromoCode() {
+		return "invalidPromoCode";
+	}
+	
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
