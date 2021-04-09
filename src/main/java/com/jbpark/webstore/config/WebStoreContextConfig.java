@@ -14,6 +14,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
 import com.jbpark.webstore.domain.Product;
+import com.jbpark.webstore.interceptor.ProcessingTimeLogInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -41,6 +43,11 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/pdf/**").addResourceLocations("/resources/pdf/");
 	}
 
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new ProcessingTimeLogInterceptor());
+	}
+
 	@Bean
 	public MappingJackson2JsonView jsonView() {
 		MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
@@ -55,7 +62,7 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		MarshallingView xmlView = new MarshallingView(marshaller);
 		return xmlView;
 	}
-	
+
 	@Bean
 	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
 		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
@@ -65,7 +72,7 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		views.add(xmlView());
 		resolver.setDefaultViews(views);
 		return resolver;
-	}	
+	}
 
 	@Bean
 	public CommonsMultipartResolver multipartResolver() {
