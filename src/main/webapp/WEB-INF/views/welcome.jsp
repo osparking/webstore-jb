@@ -22,6 +22,14 @@ charset=UTF-8"
 	</section>
 	<section class="container">
 	<ul>
+		<li><a href="market/products/specialOffer?promo=OFF3R">판촉코드-성공(목록표시)-6장</a></li>
+		<li><a href="market/products/specialOffer?promo=OFFER">판촉코드-오류</a></li>
+		<li><a href="market/products/add">상품 추가 - (우상귀)언어버튼</a></li>
+		<li><a href="market/product?id=P1266">없는 상품 P1266 검색</a></li>
+		<li><a href="market/products/chargers">충전기류 검색</a></li>
+		<li><a href="market/product.xml?id=P1235">상품 XML 요청</a></li>
+		<li><a href="market/product.json?id=P1235">상품 JSON 요청</a></li>
+		<li><a href="market/products/add">상품 추가 - 영상 업로드</a></li>
 		<li><a href="market/products/filter/params;categories=Laptop,Tablet;brands=Google,Dell">
 			행렬변수(범주, 상표)</a></li>
 		<li><a href="market/customers/">고객 목록</a></li>
