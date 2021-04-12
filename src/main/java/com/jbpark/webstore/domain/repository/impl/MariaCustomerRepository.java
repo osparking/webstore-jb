@@ -1,4 +1,4 @@
-package com.jbpark.webstore.domain.repository.imp;
+package com.jbpark.webstore.domain.repository.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
