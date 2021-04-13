@@ -19,6 +19,9 @@
 				<p>새 고객 입력</p>
 			</div>
 		</div>
+		<div class="pull-right" style="padding-right: 50px">
+			<a href="<c:url value="/logout" />">로그아웃</a>
+		</div>
 	</section>
 	<section>
 		<form:form method="POST" modelAttribute="newCustomer"

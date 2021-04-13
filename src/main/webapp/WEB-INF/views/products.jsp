@@ -12,6 +12,11 @@
 </head>
 <body>
 	<section>
+		<div class="pull-right" style="padding-right: 50px">
+			<a href="<c:url value="/logout" />">로그아웃</a>
+		</div>
+	</section>
+	<section>
 		<div class="jumbotron">
 			<div class="container">
 				<h1>상품 목록</h1>
@@ -27,8 +32,8 @@
 	<section class="container">
 		<div class="row">
 			<c:forEach items="${products}" var="product">
-				<div class="col-sm-6 col-md-3" style="height:450px">
-					<div class="thumbnail" style="height:100%">
+				<div class="col-sm-6 col-md-3" style="height: 450px">
+					<div class="thumbnail" style="height: 100%">
 						<img src="<c:url value='/img/${product.productId}.png'></c:url>"
 							alt="상품 사진" style="width: 100%" />
 						<div class="caption">

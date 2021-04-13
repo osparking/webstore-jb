@@ -26,6 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			if ("admin".equals(u.getUsername())) {
 				auth.inMemoryAuthentication().withUser(u.getUsername()).password(u.getPassword()).roles("USER",
 						"ADMIN");
+			} else if ("custrep".equals(u.getUsername())) {
+				auth.inMemoryAuthentication().withUser(u.getUsername()).password(u.getPassword()).roles("USER",
+						"SERVICE");
 			} else {
 				auth.inMemoryAuthentication().withUser(u.getUsername()).password(u.getPassword()).roles("USER");
 			}
@@ -38,8 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.formLogin().defaultSuccessUrl("/market/products/add").failureUrl("/login?error");
 		httpSecurity.logout().logoutSuccessUrl("/login?logout");
 		httpSecurity.exceptionHandling().accessDeniedPage("/login?accessDenied");
-		httpSecurity.authorizeRequests().antMatchers("/").permitAll().antMatchers("/**/add").access("hasRole('ADMIN')")
-				.antMatchers("/**/market/**").access("hasRole('USER')");	//url끝이 add로 끝나면 권한을 admin에게 주고, market이라는 url이 중간에 있으면 일반 유저에게 권한을 준다는 의미
+		httpSecurity.authorizeRequests().antMatchers("/").permitAll()
+		.antMatchers("/**/products/add").access("hasRole('ADMIN')")
+		.antMatchers("/**/customers/add").access("hasRole('SERVICE')")
+		.antMatchers("/**/market/**").access("hasRole('USER')");	//url끝이 add로 끝나면 권한을 admin에게 주고, market이라는 url이 중간에 있으면 일반 유저에게 권한을 준다는 의미
 		httpSecurity.csrf().disable();
 	}
 }
