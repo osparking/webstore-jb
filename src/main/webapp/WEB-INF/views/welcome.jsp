@@ -22,6 +22,7 @@ charset=UTF-8"
 	</section>
 	<section class="container">
 	<ul>
+		<li><a href="login">로그인</a></li>
 		<li><a href="market/products/specialOffer?promo=OFF3R">판촉코드-성공(목록표시)-6장</a></li>
 		<li><a href="market/products/specialOffer?promo=OFFER">판촉코드-오류</a></li>
 		<li><a href="market/products/add">상품 추가 - (우상귀)언어버튼</a></li>
