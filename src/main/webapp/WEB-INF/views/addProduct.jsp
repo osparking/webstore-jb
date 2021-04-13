@@ -15,8 +15,8 @@
 <body>
 	<section>
 		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=ko">한글</a>|<a href="?language=en">English</a>
-			<a href="<c:url value="/logout" />">로그아웃</a>
+			<a href="?language=ko">한글</a>|<a href="?language=en">English</a> <a
+				href="<c:url value="/logout" />">로그아웃</a>
 		</div>
 	</section>
 	<section>
@@ -30,6 +30,7 @@
 	<section class="container">
 		<form:form method="POST" modelAttribute="newProduct"
 			class="form-horizontal" enctype="multipart/form-data">
+			<form:errors path="*" cssClass="alert alert-danger" element="div"/>
 			<fieldset>
 				<legend>신상품 정보 입력</legend>
 				<span>${errorMsg}</span>
@@ -40,6 +41,7 @@
 					<div class="col-lg-10">
 						<form:input id="productId" path="productId" type="text"
 							class="form:input-large" />
+						<form:errors path="productId" cssClass="text-danger" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -49,6 +51,7 @@
 					<div class="col-lg-10">
 						<form:input id="name" path="name" type="text"
 							class="form:input-large" />
+						<form:errors path="name" cssClass="text-danger" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -58,6 +61,7 @@
 					<div class="col-lg-10">
 						<form:input id="unitPrice" path="unitPrice" type="text"
 							class="form:input-large" />
+						<form:errors path="unitPrice" cssClass="text-danger" />
 					</div>
 				</div>
 				<div class="form-group">

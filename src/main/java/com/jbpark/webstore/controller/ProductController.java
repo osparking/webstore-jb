@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -37,7 +38,7 @@ public class ProductController {
 	public String invalidPromoCode() {
 		return "invalidPromoCode";
 	}
-	
+
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
@@ -45,10 +46,17 @@ public class ProductController {
 		return "addProduct";
 	}
 
-	@RequestMapping(value = "/products/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE
-			+ "; charset=utf-8")
-	public String processAddNewProductForm(@ModelAttribute("newProduct") Product newProduct, BindingResult result,
-			Model model, HttpServletRequest request) {
+	@RequestMapping(value = "/products/add", method = RequestMethod.POST)
+	public String processAddNewProductForm(
+			Model model,
+			@ModelAttribute("newProduct") @Valid Product newProduct,
+			BindingResult result,
+			HttpServletRequest request 
+			) {
+		if (result.hasErrors()) {
+			return "addProduct";
+		}
+
 		try {
 			String[] suppressedFields = result.getSuppressedFields();
 			if (suppressedFields.length > 0) {
