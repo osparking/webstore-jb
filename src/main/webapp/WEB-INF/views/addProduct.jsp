@@ -29,8 +29,9 @@
 	</section>
 	<section class="container">
 		<form:form method="POST" modelAttribute="newProduct"
+			onsubmit="return validateUnits(this)"
 			class="form-horizontal" enctype="multipart/form-data">
-			<form:errors path="*" cssClass="alert alert-danger" element="div"/>
+			<form:errors path="*" cssClass="alert alert-danger" element="div" />
 			<fieldset>
 				<legend>신상품 정보 입력</legend>
 				<span>${errorMsg}</span>
@@ -80,7 +81,7 @@
 					<div class="col-lg-10">
 						<form:input id="category" path="category" type="text"
 							class="form:input-large" />
-						<form:errors path="category" cssClass="text-danger"/>
+						<form:errors path="category" cssClass="text-danger" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -90,6 +91,7 @@
 					<div class="col-lg-10">
 						<form:input id="unitsInStock" path="unitsInStock" type="text"
 							class="form:input-large" />
+						<form:errors path="unitsInStock" cssClass="text-danger" />
 					</div>
 				</div>
 
@@ -141,5 +143,12 @@
 			</fieldset>
 		</form:form>
 	</section>
+	<script type="text/javascript">
+		function validateUnits(form) {
+			if (!document.getElementById("unitsInStock").value) {
+				document.getElementById("unitsInStock").value = "0";
+			}
+		}
+	</script>
 </body>
 </html>

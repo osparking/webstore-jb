@@ -51,7 +51,11 @@ public class Product implements Serializable {
 			message = "{Pattern.Product.category.validation}")
 	@NotNull(message = "{NotNull.Product.catogory.validation}")
 	private String category;
-	private long unitsInStock;
+	
+	@Digits(integer=8, fraction=0,message="{Digits.Product.unitsInStock.validation}")
+	@Min(value=0, message="{Min.Product.unitsInStock.validation}")
+	@NotNull(message = "{NotNull.Product.unitsInStock.validation}")
+	private Long unitsInStock;
 	private String unitsInStockStr;
 	private long unitsInOrder;
 	private boolean discontinued;
@@ -146,7 +150,7 @@ public class Product implements Serializable {
 		this.category = category;
 	}
 
-	public long getUnitsInStock() {
+	public Long getUnitsInStock() {
 		return unitsInStock;
 	}
 
@@ -154,7 +158,7 @@ public class Product implements Serializable {
 		return unitsInStockStr;
 	}
 
-	public void setUnitsInStock(long unitsInStock) {
+	public void setUnitsInStock(Long unitsInStock) {
 		this.unitsInStock = unitsInStock;
 		this.unitsInStockStr = ValueFormat.format(unitsInStock, ValueFormat.COMMAS);
 	}
