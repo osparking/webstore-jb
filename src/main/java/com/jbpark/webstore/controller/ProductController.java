@@ -29,7 +29,8 @@ import com.jbpark.webstore.domain.Product;
 import com.jbpark.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.jbpark.webstore.exception.ProductNotFoundException;
 import com.jbpark.webstore.service.ProductService;
-import com.jbpark.webstore.validator.UnitsInStockValidator;
+
+import binder.ProductValidator;
 
 @RequestMapping("market")
 @Controller
@@ -40,7 +41,7 @@ public class ProductController {
 	}
 
 	@Autowired
-	private UnitsInStockValidator unitsInStockValidator;
+	private ProductValidator productValidator;
 	
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
@@ -106,7 +107,7 @@ public class ProductController {
 	public void initialiseBinder(WebDataBinder binder) {
 		binder.setAllowedFields("productId", "name", "unit*", "description", "manufacturer", "category", "condition",
 				"productImage", "productManual");
-		binder.setValidator(unitsInStockValidator);
+		binder.setValidator(productValidator);
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습

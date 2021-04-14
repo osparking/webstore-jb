@@ -1,7 +1,9 @@
 package com.jbpark.webstore.config;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -32,12 +34,11 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.jbpark.webstore.domain.Product;
 import com.jbpark.webstore.interceptor.PromoCodeInterceptor;
+import com.jbpark.webstore.validator.UnitsInStockValidator;
+
+import binder.ProductValidator;
 
 @Configuration
 @EnableWebMvc
@@ -73,6 +74,15 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
 		bean.setValidationMessageSource(messageSource());
 		return bean;
+	}
+
+	@Bean
+	public ProductValidator productValidator() {
+		Set<Validator> springValidators = new HashSet<Validator>();
+		springValidators.add(new UnitsInStockValidator());
+		ProductValidator productValidator = new ProductValidator();
+		productValidator.setSpringValidators(springValidators);
+		return productValidator;
 	}
 
 	@Bean
