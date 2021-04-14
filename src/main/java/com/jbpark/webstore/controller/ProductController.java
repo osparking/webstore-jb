@@ -9,7 +9,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -30,6 +29,7 @@ import com.jbpark.webstore.domain.Product;
 import com.jbpark.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.jbpark.webstore.exception.ProductNotFoundException;
 import com.jbpark.webstore.service.ProductService;
+import com.jbpark.webstore.validator.UnitsInStockValidator;
 
 @RequestMapping("market")
 @Controller
@@ -39,6 +39,9 @@ public class ProductController {
 		return "invalidPromoCode";
 	}
 
+	@Autowired
+	private UnitsInStockValidator unitsInStockValidator;
+	
 	@RequestMapping(value = "/products/add", method = RequestMethod.GET)
 	public String getAddNewProductForm(Model model) {
 		Product newProduct = new Product();
@@ -103,6 +106,7 @@ public class ProductController {
 	public void initialiseBinder(WebDataBinder binder) {
 		binder.setAllowedFields("productId", "name", "unit*", "description", "manufacturer", "category", "condition",
 				"productImage", "productManual");
+		binder.setValidator(unitsInStockValidator);
 	}
 
 	@RequestMapping("/products/filter/{params}") // 6절 실습
