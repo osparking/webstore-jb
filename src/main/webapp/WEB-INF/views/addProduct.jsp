@@ -122,6 +122,7 @@
 					<div class="col-lg-10">
 						<form:input id="productImage" path="productImage" type="file"
 							class="form:input-large" />
+						<form:errors path="productImage" cssClass="text-danger"/>
 					</div>
 				</div>
 				<!-- 상품 안내서 입력 -->

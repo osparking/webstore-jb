@@ -36,6 +36,7 @@ import org.springframework.web.util.UrlPathHelper;
 
 import com.jbpark.webstore.domain.Product;
 import com.jbpark.webstore.interceptor.PromoCodeInterceptor;
+import com.jbpark.webstore.validator.ProductImageValidator;
 import com.jbpark.webstore.validator.UnitsInStockValidator;
 
 import binder.ProductValidator;
@@ -77,10 +78,20 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Bean
+	public ProductImageValidator productImageValidator() {
+		ProductImageValidator productImageValidator
+			= new ProductImageValidator();
+		productImageValidator.setAllowedSize(1024 * 1024);
+		return productImageValidator;
+	}
+
+	@Bean
 	public ProductValidator productValidator() {
 		Set<Validator> springValidators = new HashSet<Validator>();
 		springValidators.add(new UnitsInStockValidator());
 		ProductValidator productValidator = new ProductValidator();
+		springValidators.add(productImageValidator());
+		
 		productValidator.setSpringValidators(springValidators);
 		return productValidator;
 	}
