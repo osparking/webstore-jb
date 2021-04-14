@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.jbpark.webstore.util.ValueFormat;
+import com.jbpark.webstore.validator.ProductCategory;
+import com.jbpark.webstore.validator.ProductId;
 
 /**
  * 
@@ -33,6 +33,7 @@ public class Product implements Serializable {
 	private static final long serialVersionUID = 6108530066658600557L;
 
 	@Pattern(regexp = "P[1-9]+", message = "{Pattern.Product.productId.validation}")
+	@ProductId
 	private String productId;
 
 	@Size(min = 4, max = 50, message = "{Size.Product.name.validation}")
@@ -50,6 +51,7 @@ public class Product implements Serializable {
 	@Pattern(regexp = "[a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+", 
 			message = "{Pattern.Product.category.validation}")
 	@NotNull(message = "{NotNull.Product.catogory.validation}")
+	@ProductCategory
 	private String category;
 	
 	@Digits(integer=8, fraction=0,message="{Digits.Product.unitsInStock.validation}")
