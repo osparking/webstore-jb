@@ -9,13 +9,17 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js">
+</script>
+<script src="<%=request.getContextPath()%>/resources/js/controller.js"></script>
 <title>ID로 찾은 상품</title>
 </head>
 <body>
 	<section>
 		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=ko">한글</a>|<a href="?language=en">English</a>
-			<a href="<c:url value="/logout" />">로그아웃</a>
+			<a href="?language=ko">한글</a>|<a href="?language=en">English</a> <a
+				href="<c:url value="/logout" />">로그아웃</a>
 		</div>
 	</section>
 	<section>
@@ -25,7 +29,7 @@
 			</div>
 		</div>
 	</section>
-	<section class="container">
+	<section class="container" ng-app="cartApp">
 		<div class="row">
 			<div class="col-md-5">
 				<img src="<c:url value='/img/${product.productId}.png'></c:url>"
@@ -47,18 +51,23 @@
 					<strong>재고 수량 </strong> : ${product.unitsInStockStr}
 				</p>
 				<p>
-					<strong><a href="/webstore-jb/pdf/${product.productId}.pdf">
-							[설명서 내려받기(${product.productId}.pdf)]</a></strong>
+					<strong><a
+						href="/webstore-jb/pdf/${product.productId}.pdf"> [설명서
+							내려받기(${product.productId}.pdf)]</a></strong>
 				</p>
 				<p>
 					<strong>상품 단가 </strong> : ${product.unitPriceStr}원
 				</p>
-				<p>
+				<p ng-controller="cartCtrl">
 					<a href="<spring:url value='/market/products' />"
 						class="btn btn-default"> <span
 						class="glyphicon-hand-left glyphicon"></span>뒤로 가기
-					</a> <a href="#" class="btn btn-warning btn-large"> <span
+					</a> <a href="#" class="btn btn-warning btn-large"
+						ng-click="addToCart('${product.productId}')"> <span
 						class="glyphicon-shopping-cart glyphicon"></span>주문하기
+					</a> <a href="<spring:url value='/cart' />"
+						class="btn btn-default"> <span
+						class="glyphicon-hand-right glyphicon"></span>카트보기
 					</a>
 				</p>
 			</div>
