@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.jbpark.webstore.domain.Customer;
+import com.jbpark.webstore.domain.Customers;
 import com.jbpark.webstore.domain.repository.CustomerRepository;
 import com.jbpark.webstore.service.CustomerService;
 
@@ -16,12 +16,12 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepository;
 	
 	@Override
-	public List<Customer> getAllCustomers() {
+	public List<Customers> getAllCustomers() {
 		return customerRepository.getAllCustomers();
 	}
 
 	@Override
-	public void addCustomer(Customer customer) throws DataAccessException {
+	public void addCustomer(Customers customer) throws DataAccessException {
 		customerRepository.addCustomer(customer);
 	}
 
