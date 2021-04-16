@@ -45,7 +45,7 @@ model="order">
 
 <action-state id="saveCustomerInfo">
 	<evaluate
-	expression="customerServiceImpl.saveCustomer(order.customer)" />
+	expression="customerServiceImpl.saveCustomerDetail(order.customer)" />
 	<transition to="collectShippingDetail" />
 </action-state>
 

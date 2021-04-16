@@ -10,6 +10,6 @@ public interface CustomerRepository {
 	void addCustomer(Customers customer);
 	List<Customer> getAllCustomerDetail();
 	Customer getAcustomer(String customerId);
-	long saveCustomer(Customer customer);
+	long saveCustomerDetail(Customer customer);
 	Boolean isCustomerExist(String customerId);
 }

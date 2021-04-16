@@ -79,7 +79,7 @@ public class MariaCustomerRepository implements CustomerRepository {
 		qry += "Select C.ID, C.name, C.phone_number,";
 		qry += " A.ZIPCODE, A.WIDECIDO, A.CIGOONGU, A.STREETNAME,";
 		qry += " A.BUILDINGNO, A.UNITNO ";
-		qry += "From customer C";
+		qry += "From customers C";
 		qry += " Join address A on C.billing_address_id = A.ID ";
 		qry += "WHERE C.ID = :id";
 		
@@ -118,10 +118,13 @@ public class MariaCustomerRepository implements CustomerRepository {
 		}
 	}
 
+	/**
+	 * 고객 정보를 주소 포함하여 DB 에 저장한다.
+	 */
 	@Override
-	public long saveCustomer(Customer customer) {
+	public long saveCustomerDetail(Customer customer) {
 		long addressId = addressRepository.saveAddress(customer.getBillingAddress());
-		String SQL = "INSERT INTO CUSTOMER ";
+		String SQL = "INSERT INTO CUSTOMERS ";
 		SQL += "(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) ";
 		SQL += "VALUES (:name, :phoneNumber, :addressId)";
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -136,7 +139,7 @@ public class MariaCustomerRepository implements CustomerRepository {
 
 	@Override
 	public Boolean isCustomerExist(String customerId) {
-		String sql = "SELECT count(*) FROM customer";
+		String sql = "SELECT count(*) FROM customers";
 		sql += " WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", customerId);

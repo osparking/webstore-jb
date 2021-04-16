@@ -33,8 +33,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public long saveCustomer(Customer customer) {
-		return customerRepository.saveCustomer(customer);
+	public long saveCustomerDetail(Customer customer) {
+		return customerRepository.saveCustomerDetail(customer);
 	}
 
 	@Override

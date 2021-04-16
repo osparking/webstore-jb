@@ -10,7 +10,7 @@ public interface CustomerService {
 	void addCustomer(Customers customer);
 	
 	List<Customer> getAllCustomerDetail();
-	long saveCustomer(Customer customer);
+	long saveCustomerDetail(Customer customer);
 	Customer getCustomer(String customerId);
 	Boolean isCustomerExist(String customerId);	
 }

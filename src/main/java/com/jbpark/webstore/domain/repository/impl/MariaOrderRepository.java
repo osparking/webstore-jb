@@ -64,7 +64,7 @@ public class MariaOrderRepository implements OrderRepository {
 	
 	@Override
 	public long saveOrder(Order order) {
-		Long customerId = customerRepository.saveCustomer(order.getCustomer());
+		Long customerId = customerRepository.saveCustomerDetail(order.getCustomer());
 		Long shippingDetailId = saveShippingDetail(order.getShippingDetail());
 		order.getCustomer().setCustomerIdLong(customerId);
 		order.getShippingDetail().setId(shippingDetailId);
