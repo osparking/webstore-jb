@@ -28,8 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public List<Customer> getAllCustomer() {
-		return customerRepository.getAllCustomer();
+	public List<Customer> getAllCustomerDetail() {
+		return customerRepository.getAllCustomerDetail();
 	}
 
 	@Override

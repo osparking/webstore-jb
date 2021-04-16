@@ -22,7 +22,6 @@ import com.jbpark.webstore.domain.Customer;
 import com.jbpark.webstore.domain.Customers;
 import com.jbpark.webstore.domain.repository.AddressRepository;
 import com.jbpark.webstore.domain.repository.CustomerRepository;
-import com.packt.webstore.domain.repository.impl.InMemoryCustomerRepository.CustomerMapper2;
 
 @Repository
 public class MariaCustomerRepository implements CustomerRepository {
@@ -62,13 +61,13 @@ public class MariaCustomerRepository implements CustomerRepository {
 	}
 
 	@Override
-	public List<Customer> getAllCustomer() {
+	public List<Customer> getAllCustomerDetail() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String qry = null;
 		qry = "Select C.ID, C.name, C.phone_number,";
 		qry += " A.ZIPCODE, A.WIDECIDO, A.CIGOONGU, A.STREETNAME, ";
 		qry += " A.BUILDINGNO, A.UNITNO ";
-		qry += "From customer C";
+		qry += "From customers C";
 		qry += " Join address A on C.billing_address_id = A.ID";
 		List<Customer> result = jdbcTemplate.query(qry, params, new CustomerMapper2());
 		return result;

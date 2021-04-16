@@ -8,7 +8,7 @@ import com.jbpark.webstore.domain.Customers;
 public interface CustomerRepository {
 	List<Customers> getAllCustomers();
 	void addCustomer(Customers customer);
-	List<Customer> getAllCustomer();
+	List<Customer> getAllCustomerDetail();
 	Customer getAcustomer(String customerId);
 	long saveCustomer(Customer customer);
 	Boolean isCustomerExist(String customerId);

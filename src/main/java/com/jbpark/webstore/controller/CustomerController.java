@@ -17,10 +17,10 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
-	@RequestMapping("/customers2")
-	public String list2(Model model) {
-		model.addAttribute("customers", customerService.getAllCustomer());
-		return "customers2";
+	@RequestMapping("/customersDetail")
+	public String listDetail(Model model) {
+		model.addAttribute("customers", customerService.getAllCustomerDetail());
+		return "customersDetail";
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.GET)
