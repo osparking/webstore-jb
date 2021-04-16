@@ -1,3 +1,11 @@
+INSERT INTO ADDRESS VALUES (
+	1, '01020', '서울시', '종로구', '종로2가100길', '15', '501호');
+INSERT INTO ADDRESS VALUES (
+	2, '02040', '부산시', '영도구', '영도대로7로56길', '64', '101동309호');
+INSERT INTO CUSTOMER VALUES (10, '이상호', '010-2324-2345', 1);
+INSERT INTO CUSTOMER VALUES (11, '박찬호', '010-5555-9898', 2);
+
+
 INSERT INTO PRODUCTS VALUES ('P1234',
 'iPhone 6s',
 'Apple iPhone 6s smartphone with 4.00-inch

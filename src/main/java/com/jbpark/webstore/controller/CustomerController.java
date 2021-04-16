@@ -17,14 +17,19 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
+	@RequestMapping("/customers2")
+	public String list2(Model model) {
+		model.addAttribute("customers", customerService.getAllCustomer());
+		return "customers2";
+	}
+
 	@RequestMapping(value = "/customers/add", method = RequestMethod.GET)
 	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customers newCustomer) {
 		return "addCustomer";
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.POST)
-	public String processAddNewCustomerForm(Model model, 
-			@ModelAttribute("newCustomer") Customers newCustomer) {
+	public String processAddNewCustomerForm(Model model, @ModelAttribute("newCustomer") Customers newCustomer) {
 		try {
 			customerService.addCustomer(newCustomer);
 			return "redirect:/market/customers";
