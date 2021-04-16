@@ -2,25 +2,52 @@ package com.jbpark.webstore.domain;
 
 import java.io.Serializable;
 
+import com.jbpark.webstore.domain.Customer;
+
 public class Customer implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6826767593342468039L;
-	private Long customerId;
+	private boolean wrongId = false;
+	private Long customerIdLong;
 	private String name;
 	private Address billingAddress;
 	private String phoneNumber;
+	private int noOfOrdersMade;
+
+	public int getNoOfOrdersMade() {
+		return noOfOrdersMade;
+	}
+	public void setNoOfOrdersMade(int noOfOrdersMade) {
+		this.noOfOrdersMade = noOfOrdersMade;
+	}
+	public Long getCustomerIdLong() {
+		return customerIdLong;
+	}
+	public void setWrongId(boolean wrongId) {
+		this.wrongId = wrongId;
+	}
+	public void setCustomerIdLong(Long customerIdLong) {
+		this.customerIdLong = customerIdLong;
+	}
+	public Boolean getWrongId() {
+		return wrongId;
+	}
+
+	public void setWrongId(Boolean wrongId) {
+		this.wrongId = wrongId;
+	}
 
 	public Customer() {
 		super();
 		this.billingAddress = new Address();
 	}
-
+	
 	public Customer(Long customerId, String name) {
 		this();
-		this.customerId = customerId;
+		this.customerIdLong = customerId;
 		this.name = name;
 	}
 
@@ -32,10 +59,10 @@ public class Customer implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((customerIdLong == null) ? 0 : customerIdLong.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -44,21 +71,15 @@ public class Customer implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		
 		Customer other = (Customer) obj;
-		if (customerId == null) {
-			if (other.customerId != null)
+		if (customerIdLong == null) {
+			if (other.customerIdLong != null)
 				return false;
-		} else if (!customerId.equals(other.customerId))
-			return false;
+		} else if (!customerIdLong.equals(other.customerIdLong))
+			return false;		
+		
 		return true;
-	}
-
-	public Long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
 	}
 
 	public String getName() {

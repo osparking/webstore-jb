@@ -1,5 +1,6 @@
 package com.jbpark.webstore.domain.repository.impl;
 
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,10 +12,10 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import com.jbpark.webstore.domain.Address;
-import com.jbpark.webstore.domain.Customer;
 import com.jbpark.webstore.domain.Order;
 import com.jbpark.webstore.domain.ShippingDetail;
+import com.jbpark.webstore.domain.repository.AddressRepository;
+import com.jbpark.webstore.domain.repository.CustomerRepository;
 import com.jbpark.webstore.domain.repository.OrderRepository;
 import com.jbpark.webstore.service.CartService;
 
@@ -24,9 +25,12 @@ public class MariaOrderRepository implements OrderRepository {
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	@Autowired
 	private CartService CartService;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 
 	private long saveShippingDetail(ShippingDetail shippingDetail) {
-		long addressId = saveAddress(shippingDetail.getShippingAddress());
+		long addressId = addressRepository.saveAddress(shippingDetail.getShippingAddress());
 		String SQL = "INSERT INTO SHIPPING_DETAIL ";
 		SQL += "(NAME,SHIPPING_DATE,SHIPPING_ADDRESS_ID) ";
 		SQL += "VALUES (:name, :shippingDate, :addressId)";
@@ -47,7 +51,7 @@ public class MariaOrderRepository implements OrderRepository {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", order.getOrderId());
 		params.put("cartId", order.getCart().getId());
-		params.put("customerId", order.getCustomer().getCustomerId());
+		params.put("customerId", order.getCustomer().getCustomerIdLong());
 		params.put("shippingDetailId", order.getShippingDetail().getId());
 		SqlParameterSource paramSource = new MapSqlParameterSource(params);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -55,11 +59,14 @@ public class MariaOrderRepository implements OrderRepository {
 		return keyHolder.getKey().longValue();
 	}
 
+	@Autowired
+	private CustomerRepository customerRepository;
+	
 	@Override
 	public long saveOrder(Order order) {
-		Long customerId = saveCustomer(order.getCustomer());
+		Long customerId = customerRepository.saveCustomer(order.getCustomer());
 		Long shippingDetailId = saveShippingDetail(order.getShippingDetail());
-		order.getCustomer().setCustomerId(customerId);
+		order.getCustomer().setCustomerIdLong(customerId);
 		order.getShippingDetail().setId(shippingDetailId);
 		long createdOrderId = createOrder(order);
 		CartService.clearCart(order.getCart().getId());

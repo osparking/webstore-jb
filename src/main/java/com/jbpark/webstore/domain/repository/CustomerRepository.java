@@ -11,4 +11,5 @@ public interface CustomerRepository {
 	List<Customer> getAllCustomer();
 	Customer getAcustomer(String customerId);
 	long saveCustomer(Customer customer);
+	Boolean isCustomerExist(String customerId);
 }

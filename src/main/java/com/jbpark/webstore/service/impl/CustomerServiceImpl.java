@@ -44,8 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Boolean isCustomerExist(String customerId) {
-		// TODO Auto-generated method stub
-		return null;
+		return customerRepository.isCustomerExist(customerId);
 	}
 
 }
