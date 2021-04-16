@@ -21,7 +21,7 @@ import com.jbpark.webstore.service.CartService;
 @Repository
 public class MariaOrderRepository implements OrderRepository {
 	@Autowired
-	private NamedParameterJdbcTemplate jdbcTempleate;
+	private NamedParameterJdbcTemplate jdbcTemplate;
 	@Autowired
 	private CartService CartService;
 
@@ -36,40 +36,7 @@ public class MariaOrderRepository implements OrderRepository {
 		params.put("addressId", addressId);
 		SqlParameterSource paramSource = new MapSqlParameterSource(params);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTempleate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
-		return keyHolder.getKey().longValue();
-	}
-
-	private long saveCustomer(Customer customer) {
-		long addressId = saveAddress(customer.getBillingAddress());
-		String SQL = "INSERT INTO CUSTOMER ";
-		SQL += "(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) ";
-		SQL += "VALUES (:name, :phoneNumber, :addressId)";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("name", customer.getName());
-		params.put("phoneNumber", customer.getPhoneNumber());
-		params.put("addressId", addressId);
-		SqlParameterSource paramSource = new MapSqlParameterSource(params);
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTempleate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
-		return keyHolder.getKey().longValue();
-	}
-
-	private long saveAddress(Address address) {
-		String SQL = "INSERT INTO ADDRESS (ZIPCODE,";
-		SQL += "WIDECIDO,CIGOONGU,STREETNAME,BUILDINGNO,UNITNO) ";
-		SQL += "VALUES (:zipCode, :wideCido, :ciGoonGu,";
-		SQL += ":streetName, :buildingNo, :unitNo)";
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("zipCode", address.getZipCode());
-		params.put("wideCido", address.getWideCiDo());
-		params.put("ciGoonGu", address.getCiGoonGu());
-		params.put("streetName", address.getStreetName());
-		params.put("buildingNo", address.getBuildingNo());
-		params.put("unitNo", address.getUnitNo());
-		SqlParameterSource paramSource = new MapSqlParameterSource(params);
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTempleate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
+		jdbcTemplate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
 		return keyHolder.getKey().longValue();
 	}
 
@@ -84,7 +51,7 @@ public class MariaOrderRepository implements OrderRepository {
 		params.put("shippingDetailId", order.getShippingDetail().getId());
 		SqlParameterSource paramSource = new MapSqlParameterSource(params);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		jdbcTempleate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
+		jdbcTemplate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
 		return keyHolder.getKey().longValue();
 	}
 
@@ -98,5 +65,4 @@ public class MariaOrderRepository implements OrderRepository {
 		CartService.clearCart(order.getCart().getId());
 		return createdOrderId;
 	}
-
 }

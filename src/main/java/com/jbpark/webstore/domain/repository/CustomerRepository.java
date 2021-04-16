@@ -9,4 +9,6 @@ public interface CustomerRepository {
 	List<Customers> getAllCustomers();
 	void addCustomer(Customers customer);
 	List<Customer> getAllCustomer();
+	Customer getAcustomer(String customerId);
+	long saveCustomer(Customer customer);
 }

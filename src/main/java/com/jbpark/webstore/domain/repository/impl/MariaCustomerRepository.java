@@ -9,18 +9,27 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.jbpark.webstore.domain.Address;
 import com.jbpark.webstore.domain.Customer;
 import com.jbpark.webstore.domain.Customers;
+import com.jbpark.webstore.domain.repository.AddressRepository;
 import com.jbpark.webstore.domain.repository.CustomerRepository;
 
 @Repository
 public class MariaCustomerRepository implements CustomerRepository {
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private AddressRepository addressRepository;
+	
 
 	public List<Customers> getAllCustomers() {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -82,4 +91,38 @@ public class MariaCustomerRepository implements CustomerRepository {
 			return customer;
 		}
 	}
+
+	@Override
+	public long saveCustomer(Customer customer) {
+		long addressId = 
+				addressRepository.saveAddress(customer.getBillingAddress());
+		String SQL = "INSERT INTO CUSTOMER ";
+		SQL += "(NAME,PHONE_NUMBER,BILLING_ADDRESS_ID) ";
+		SQL += "VALUES (:name, :phoneNumber, :addressId)";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", customer.getName());
+		params.put("phoneNumber", customer.getPhoneNumber());
+		params.put("addressId", addressId);
+		SqlParameterSource paramSource = new MapSqlParameterSource(params);
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTemplate.update(SQL, paramSource, keyHolder, new String[] { "ID" });
+		return keyHolder.getKey().longValue();
+	}	
+	
+	@Override
+	public Customer getAcustomer(String customerId) {
+		String qry = "";
+		qry += "Select C.name, C.phone_number,";
+		qry += " A.ZIPCODE, A.WIDECIDO, A.CIGOONGU, A.STREETNAME,";
+		qry += " A.BUILDINGNO, A.UNITNO ";
+		qry += "From customer C";
+		qry += " Join address A on C.billing_address_id = A.ID";
+		qry += "WHERE C.ID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", customerId);
+		Customer result = jdbcTemplate.queryForObject(
+		qry, params, new CustomerMapper2());
+		return result;
+	}	
+	
 }
