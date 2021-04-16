@@ -8,7 +8,9 @@
 <meta charset="UTF-8">
 <link rel="stylesheet"
 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.1/angular.min.js">
+	
 </script>
 <script src="<%=request.getContextPath()%>/resources/js/controller.js"></script>
 <title>쇼핑카트</title>
@@ -27,8 +29,9 @@
 			<div>
 				<a class="btn btn-danger pull-left" ng-click="clearCart()"> <span
 					class="glyphicon glyphicon-remove-sign"></span> Clear Cart
-				</a> <a href="#" class="btn btn-success pull-right"> <span
-					class="glyphicon-shopping-cart glyphicon"></span> Check out
+				</a> <a href="<spring:url value='/checkout?cartId=${cartId}'/>"
+					class="btn btn-success pull-right"> <span
+					class="glyphicon-shopping-cart glyphicon"></span>대금 지불
 				</a>
 			</div>
 			<table class="table table-hover">
