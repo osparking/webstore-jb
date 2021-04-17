@@ -15,7 +15,7 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 </action-state>
 
 <decision-state id ="checkCustomerExist">
-	<if test = "customerServiceImpl.isCustomerExist(order.customer.customerIdLong)"
+	<if test = "customerServiceImpl.isCustomerExist(order.customer.customerId)"
 	then = "collectShippingDetail"
 	else = "collectCustomerInfo"/>
 </decision-state>
@@ -27,7 +27,7 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
 <action-state id="processCustomerId">
 	<evaluate
-	expression="customerServiceImpl.getCustomer(order.customer.customerIdLong)"
+	expression="customerServiceImpl.getCustomer(order.customer.customerId)"
 	result="order.customer" />
 	<transition to="collectCustomerInfo" />
 </action-state>
@@ -35,12 +35,12 @@ http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 <view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp"
 model="order">
 <transition on="customerInfoCollected" to="saveCustomerInfo" />
+<transition on="backToCollectCustomerId" to="collectCustomerId" />
 </view-state>
 
 <view-state id="collectShippingDetail" model="order">
 <transition on="shippingDetailCollected" to="orderConfirmation" />
-<transition on="backToCollectCustomerInfo" to="collectCustomerInfo"
-/>
+<transition on="backToCollectCustomerInfo" to="collectCustomerInfo"/>
 </view-state>
 
 <action-state id="saveCustomerInfo">
