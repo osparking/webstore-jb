@@ -51,7 +51,7 @@ public class MariaOrderRepository implements OrderRepository {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", order.getOrderId());
 		params.put("cartId", order.getCart().getId());
-		params.put("customerId", order.getCustomer().getCustomerIdLong());
+		params.put("customerId", order.getCustomer().getCustomerId());
 		params.put("shippingDetailId", order.getShippingDetail().getId());
 		SqlParameterSource paramSource = new MapSqlParameterSource(params);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -66,7 +66,7 @@ public class MariaOrderRepository implements OrderRepository {
 	public long saveOrder(Order order) {
 		Long customerId = customerRepository.saveCustomerDetail(order.getCustomer());
 		Long shippingDetailId = saveShippingDetail(order.getShippingDetail());
-		order.getCustomer().setCustomerIdLong(customerId);
+		order.getCustomer().setCustomerId(customerId);
 		order.getShippingDetail().setId(shippingDetailId);
 		long createdOrderId = createOrder(order);
 		CartService.clearCart(order.getCart().getId());

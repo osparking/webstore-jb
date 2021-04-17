@@ -10,12 +10,13 @@ public class Customer implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6826767593342468039L;
-	private boolean wrongId = false;
 	private Long customerId;
 	private String name;
+	private String address;
+	private int noOfOrdersMade;
 	private Address billingAddress;
 	private String phoneNumber;
-	private int noOfOrdersMade;
+	private boolean wrongId = false;
 
 	public int getNoOfOrdersMade() {
 		return noOfOrdersMade;
@@ -104,6 +105,12 @@ public class Customer implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

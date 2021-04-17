@@ -18,18 +18,18 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepository;
 
 	@Override
-	public List<Customers> getAllCustomers() {
+	public List<Customer> getAllCustomers() {
 		return customerRepository.getAllCustomers();
 	}
 
 	@Override
-	public void addCustomer(Customers customer) throws DataAccessException {
+	public void addCustomer(Customer customer) throws DataAccessException {
 		customerRepository.addCustomer(customer);
 	}
 
 	@Override
 	public List<Customer> getAllCustomerDetail() {
-		return customerRepository.getAllCustomerDetail();
+		return customerRepository.getAllCustomersDetail();
 	}
 
 	@Override

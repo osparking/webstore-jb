@@ -38,7 +38,7 @@
 					<div class="thumbnail">
 						<div class="caption">
 							<h3>${customer.name}</h3>
-							<p>${customer.customerIdLong}</p>
+							<p>${customer.customerId}</p>
 							<p>${customer.billingAddress.zipCode}</p>
 							<p>${customer.billingAddress.wideCiDo}</p>
 							<p>${customer.billingAddress.ciGoonGu}</p>

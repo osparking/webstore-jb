@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jbpark.webstore.domain.Customers;
+import com.jbpark.webstore.domain.Customer;
 import com.jbpark.webstore.service.CustomerService;
 
 @Controller
@@ -24,17 +24,17 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.GET)
-	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customers newCustomer) {
+	public String getAddNewCustomerForm(@ModelAttribute("newCustomer") Customer newCustomer) {
 		return "addCustomer";
 	}
 
 	@RequestMapping(value = "/customers/add", method = RequestMethod.POST)
-	public String processAddNewCustomerForm(Model model, @ModelAttribute("newCustomer") Customers newCustomer) {
+	public String processAddNewCustomerForm(Model model, @ModelAttribute("newCustomer") Customer newCustomer) {
 		try {
 			customerService.addCustomer(newCustomer);
 			return "redirect:/market/customers";
 		} catch (DataAccessException e) {
-			String custId = newCustomer.getCustomerId();
+			Long custId = newCustomer.getCustomerId();
 			String errorMsg = "고객 ID '" + custId + "'는 사용 중입니다. 다른 ID를 선택하세요.";
 			model.addAttribute("errorMsg", errorMsg);
 			return "addCustomer";

@@ -32,9 +32,9 @@
 				<div class="form-group">
 					<label class="control-label col-lg-2" for="customerId">고객ID</label>
 					<div class="col-lg-10">
-						<form:input id="customerId" path="customerIdLong" type="text"
+						<form:input id="customerId" path="customerId" type="text"
 							class="form:input-large" />
-						<form:errors path="customerIdLong" cssClass="text-danger" />
+						<form:errors path="customerId" cssClass="text-danger" />
 					</div>
 				</div>
 				<input type="hidden" name="_flowExecutionKey"

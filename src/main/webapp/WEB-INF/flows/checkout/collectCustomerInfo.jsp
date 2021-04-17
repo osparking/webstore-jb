@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<div class="col-lg-offset-2 col-lg-10">
 						<c:if test="${order.customer.wrongId == true}">
-							<p cssClass="text-danger">'${order.customer.customerIdLong}' 는
+							<p cssClass="text-danger">'${order.customer.customerId}' 는
 								등록된 사용자가 아닙니다.</p>
 							<button id="back" class="btn btn-default"
 								name="_eventId_backToCollectCustomerId">ID 새로 입력</button>
