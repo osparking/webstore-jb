@@ -7,6 +7,7 @@ import com.jbpark.webstore.domain.Product;
 
 public interface ProductService {
 	void updateAllStock();
+	void updateStock(String productId, Long stock);
 	List<Product> getAllProducts();
 	List<Product> getAllProducts(String arg);
 	List<Product> getProductsByCategory(String category);

@@ -21,11 +21,23 @@ public class MariaProductRepository implements ProductRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-
+	
+	@Override
 	public void updateStock(String productId, long noOfUnits) {
 		String SQL = "UPDATE PRODUCTS SET " + "UNITS_IN_STOCK = :unitsInStock WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("unitsInStock", noOfUnits);
+		params.put("id", productId);
+		jdbcTemplate.update(SQL, params);
+	}
+
+	@Override
+	public void changeStock(String productId, long changeAmount) {
+		String SQL = "UPDATE PRODUCTS SET " 
+				+ "UNITS_IN_STOCK = UNITS_IN_STOCK + :changeAmount "
+				+ "WHERE ID = :id";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("changeAmount", changeAmount);
 		params.put("id", productId);
 		jdbcTemplate.update(SQL, params);
 	}

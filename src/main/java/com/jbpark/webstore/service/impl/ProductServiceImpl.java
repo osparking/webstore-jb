@@ -64,4 +64,9 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.addProduct(product);
 	}
 
+	@Override
+	public void updateStock(String productId, Long stock) {
+		productRepository.updateStock(productId, stock);
+	}
+
 }
