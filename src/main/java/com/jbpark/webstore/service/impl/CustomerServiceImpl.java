@@ -39,7 +39,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomer(String customerId) {
-		return customerRepository.getAcustomer(customerId);
+		return customerRepository.getCustomer(customerId);
 	}
 
 	@Override

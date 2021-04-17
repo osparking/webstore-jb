@@ -74,7 +74,7 @@ public class MariaCustomerRepository implements CustomerRepository {
 	}
 	
 	@Override
-	public Customer getAcustomer(String customerId) {
+	public Customer getCustomer(String customerId) {
 		String qry = "";
 		qry += "Select C.ID, C.name, C.phone_number,";
 		qry += " A.ZIPCODE, A.WIDECIDO, A.CIGOONGU, A.STREETNAME,";

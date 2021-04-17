@@ -9,7 +9,7 @@ public interface CustomerRepository {
 	List<Customers> getAllCustomers();
 	void addCustomer(Customers customer);
 	List<Customer> getAllCustomerDetail();
-	Customer getAcustomer(String customerId);
+	Customer getCustomer(String customerId);
 	long saveCustomerDetail(Customer customer);
 	Boolean isCustomerExist(String customerId);
 }

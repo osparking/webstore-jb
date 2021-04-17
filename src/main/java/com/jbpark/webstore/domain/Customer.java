@@ -11,7 +11,7 @@ public class Customer implements Serializable {
 	 */
 	private static final long serialVersionUID = -6826767593342468039L;
 	private boolean wrongId = false;
-	private Long customerIdLong;
+	private Long customerId;
 	private String name;
 	private Address billingAddress;
 	private String phoneNumber;
@@ -23,14 +23,14 @@ public class Customer implements Serializable {
 	public void setNoOfOrdersMade(int noOfOrdersMade) {
 		this.noOfOrdersMade = noOfOrdersMade;
 	}
-	public Long getCustomerIdLong() {
-		return customerIdLong;
+	public Long getCustomerId() {
+		return customerId;
 	}
 	public void setWrongId(boolean wrongId) {
 		this.wrongId = wrongId;
 	}
-	public void setCustomerIdLong(Long customerIdLong) {
-		this.customerIdLong = customerIdLong;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	public Boolean getWrongId() {
 		return wrongId;
@@ -47,7 +47,7 @@ public class Customer implements Serializable {
 	
 	public Customer(Long customerId, String name) {
 		this();
-		this.customerIdLong = customerId;
+		this.customerId = customerId;
 		this.name = name;
 	}
 
@@ -59,7 +59,7 @@ public class Customer implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((customerIdLong == null) ? 0 : customerIdLong.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
 		return result;
 	}
 	
@@ -73,10 +73,10 @@ public class Customer implements Serializable {
 			return false;
 		
 		Customer other = (Customer) obj;
-		if (customerIdLong == null) {
-			if (other.customerIdLong != null)
+		if (customerId == null) {
+			if (other.customerId != null)
 				return false;
-		} else if (!customerIdLong.equals(other.customerIdLong))
+		} else if (!customerId.equals(other.customerId))
 			return false;		
 		
 		return true;
