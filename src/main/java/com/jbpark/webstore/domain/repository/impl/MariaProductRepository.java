@@ -21,10 +21,13 @@ public class MariaProductRepository implements ProductRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
+
+	// @formatter:off
 	@Override
 	public void updateStock(String productId, long noOfUnits) {
-		String SQL = "UPDATE PRODUCTS SET " + "UNITS_IN_STOCK = :unitsInStock WHERE ID = :id";
+		String SQL = "UPDATE PRODUCTS SET " 
+				+ "UNITS_IN_STOCK = :unitsInStock "
+				+ "WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("unitsInStock", noOfUnits);
 		params.put("id", productId);
@@ -41,6 +44,7 @@ public class MariaProductRepository implements ProductRepository {
 		params.put("id", productId);
 		jdbcTemplate.update(SQL, params);
 	}
+	// @formatter:on
 
 	@Override
 	public List<Product> getAllProducts(String... args) {

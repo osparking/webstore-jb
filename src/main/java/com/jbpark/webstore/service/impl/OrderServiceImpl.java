@@ -3,6 +3,7 @@ package com.jbpark.webstore.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jbpark.webstore.domain.CartItem;
 import com.jbpark.webstore.domain.Order;
 import com.jbpark.webstore.domain.repository.OrderRepository;
 import com.jbpark.webstore.domain.repository.ProductRepository;
@@ -21,6 +22,25 @@ public class OrderServiceImpl implements OrderService {
 		/**
 		 * Change(=decrease) product stock.
 		 */
+		/**
+		 * first trial : console debugging
+		for (CartItem item : order.getCart().getCartItems()) {
+			System.out.println(
+					item.getProduct().getProductId() + " " + -item.getQuantity());
+			
+		}
+		 */
+		/**
+		 * second trial : Java 7 approach		
+		for (CartItem item : order.getCart().getCartItems()) {
+			productRepository.changeStock(
+					item.getProduct().getProductId(), -item.getQuantity());
+			
+		}
+		*/
+		/**
+		 *  Java 8 lambda expression 
+		 */
 		order.getCart().getCartItems().forEach(item-> {
 			productRepository.changeStock(
 					item.getProduct().getProductId(), 
@@ -30,3 +50,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 }
+
+
+
+
+
+
