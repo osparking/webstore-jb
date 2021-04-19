@@ -13,22 +13,6 @@
 </head>
 <body>
 	<section>
-		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=ab">한글</a>|<a href="?language=en">English</a>
-			<c:if test = "${username == null}">
-				<a href="<c:url value='/login'/>">
-					<spring:message code="login.anchor.text"/>
-				</a>
-			</c:if>
-			<c:if test = "${username != null}">
-				<a href="<c:url value='/logout'/>">
-					(${username})
-					<%-- <spring:message code="logout.anchor.text"/> --%>
-				</a>
-			</c:if>
-		</div>
-	</section>
-	<section>
 		<div class="jumbotron">
 			<div style="margin-left: 10%;">
 				<h1>${greeting}</h1>

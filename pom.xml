@@ -130,5 +130,10 @@
 			<artifactId>spring-webflow</artifactId>
 			<version>2.4.2.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 	</dependencies>
 </project>

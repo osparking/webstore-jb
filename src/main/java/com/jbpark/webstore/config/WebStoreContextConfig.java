@@ -159,13 +159,4 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		urlPathHelper.setRemoveSemicolonContent(false);
 		configurer.setUrlPathHelper(urlPathHelper);
 	}
-
-	@Bean
-	public InternalResourceViewResolver getInternalResourceViewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setViewClass(JstlView.class);
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		return resolver;
-	}
 }

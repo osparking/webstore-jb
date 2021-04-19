@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/WEB-INF/layouts/template/baseLayout.jsp">
+		<put-attribute name="title" value="Sample Title" />
+		<put-attribute name="heading" value="" />
+		<put-attribute name="tagline" value="" />
+		<put-attribute name="navigation"
+			value="/WEB-INF/layouts/template/navigation.jsp" />
+		<put-attribute name="content" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/layouts/template/footer.jsp" />
+	</definition>
+	<definition name="welcome" extends="baseLayout">
+		<put-attribute name="title" value="tiles.welcome.title" />
+		<put-attribute name="heading" value="타일-상품목록" />
+		<put-attribute name="tagline"
+			value="우리 가게 모든 상품 목록" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/products.jsp" />
+	</definition>
+	<definition name="customers" extends="baseLayout">
+		<put-attribute name="title" value="tiles.customers.title" />
+		<put-attribute name="heading" value="Customers" />
+		<put-attribute name="tagline"
+			value="tiles.customers.tagline" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/customers.jsp" />
+	</definition>
+	
+	<definition name="addCustomer" extends="baseLayout">
+		<put-attribute name="title" value="고객 정보" />
+		<put-attribute name="heading" value="고객 정보 입력" />
+		<put-attribute name="tagline" value="고객 정보를 입력하세요" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/addCustomer.jsp" />
+	</definition>	
+	
+	<definition name="products" extends="baseLayout">
+		<put-attribute name="title" value="tiles.products.title" />
+		<put-attribute name="heading" value="Products" />
+		<put-attribute name="tagline"
+			value="우리 가게 모든 상품 목록" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/products.jsp" />
+	</definition>
+	<definition name="product" extends="baseLayout">
+		<put-attribute name="title" value="Product" />
+		<put-attribute name="heading" value="Product" />
+		<put-attribute name="tagline" value="Details" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/product.jsp" />
+	</definition>
+	<definition name="addProduct" extends="baseLayout">
+		<put-attribute name="title" value="Products" />
+		<put-attribute name="heading" value="Products" />
+		<put-attribute name="tagline" value="Add Product" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/addProduct.jsp" />
+	</definition>
+	<definition name="login" extends="baseLayout">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="heading"
+			value="Welcome to Web Store!" />
+		<put-attribute name="tagline"
+			value="세상에 하나 뿐인 멋진 웹 가게...얏호!" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/login.jsp" />
+	</definition>
+	<definition name="cart" extends="baseLayout">
+		<put-attribute name="title" value="Shopping Cart" />
+		<put-attribute name="heading" value="Cart" />
+		<put-attribute name="tagline"
+			value="All the selected products in your cart" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/cart.jsp" />
+	</definition>
+</tiles-definitions>

@@ -14,12 +14,6 @@
 </head>
 <body>
 	<section>
-		<div class="pull-right" style="padding-right: 50px">
-			<a href="?language=ko">한글</a>|<a href="?language=en">English</a> <a
-				href="<c:url value="/logout" />">로그아웃</a>
-		</div>
-	</section>
-	<section>
 		<div class="jumbotron">
 			<div class="container">
 				<h1>상품</h1>

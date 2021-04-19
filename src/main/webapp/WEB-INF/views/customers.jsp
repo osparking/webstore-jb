@@ -20,11 +20,6 @@
 		</div>
 	</section>
 	<section class="container">
-			<div class="pull-right" style="padding-right: 50px">
-				<a href="<c:url value="/logout" />">로그아웃</a>
-			</div>
-		</section>
-	<section class="container">
 		<a href="/webstore-jb">홈으로</a>
 		<hr>
 	</section>
