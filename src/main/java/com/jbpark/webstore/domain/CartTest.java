@@ -20,7 +20,7 @@ public class CartTest {
 		// 준비
 		ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
 		CartItem cItem = new CartItem("1");
-		Product prod = new Product("P1234", "iPhone 5s", 50_0000);
+		Product prod = new Product("P1234", "iPhone 5s", 50_0000, 1000);
 		cItem.setProduct(prod);
 		
 		int qty_1 = 2;
@@ -29,7 +29,7 @@ public class CartTest {
 		
 		long expGTotal = cItem.getTotalPrice().longValue();
 		cItem = new CartItem("2");
-		prod = new Product("P1235", "H-Phone K9", 70_0000);
+		prod = new Product("P1235", "H-Phone K9", 70_0000, 1000);
 		cItem.setProduct(prod);
 		
 		int qty_2 = 1;

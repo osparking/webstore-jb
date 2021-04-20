@@ -19,7 +19,7 @@ public class CartItemTest {
 		// @formatter:off
 		// Arrange
 		Product iphone = new Product("P1234", "iPhone 5s", 
-				50_0000);
+				50_0000, 1000);
 		cartItem.setProduct(iphone);
 		cartItem.setQuantity(1);
 		// Act

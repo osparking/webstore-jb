@@ -90,7 +90,7 @@ public class WebStoreContextConfig extends WebMvcConfigurerAdapter {
 		Set<Validator> springValidators = new HashSet<Validator>();
 		springValidators.add(new UnitsInStockValidator());
 		ProductValidator productValidator = new ProductValidator();
-		springValidators.add(productImageValidator());
+//		springValidators.add(productImageValidator());
 		
 		productValidator.setSpringValidators(springValidators);
 		return productValidator;
