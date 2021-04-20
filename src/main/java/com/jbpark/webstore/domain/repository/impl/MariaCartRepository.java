@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -24,6 +25,19 @@ public class MariaCartRepository implements CartRepository {
 	@Autowired
 	private ProductService productService;
 
+	void insertCartItem(CartItemDto cartItemDto, String cartId) {
+		Product productById = productService.getProductById(cartItemDto.getProductId());
+		String INSERT_CART_ITEM_SQL = "INSERT INTO " + "CART_ITEM(ID,PRODUCT_ID,CART_ID,QUANTITY) "
+				+ "VALUES (:id, :product_id, :cart_id, :quantity)";
+
+		Map<String, Object> cartItemsParams = new HashMap<String, Object>();
+		cartItemsParams.put("id", cartItemDto.getId());
+		cartItemsParams.put("product_id", productById.getProductId());
+		cartItemsParams.put("cart_id", cartId);
+		cartItemsParams.put("quantity", cartItemDto.getQuantity());
+		jdbcTempleate.update(INSERT_CART_ITEM_SQL, cartItemsParams);
+	}
+	
 	@Override
 	public void create(CartDto cartDto) {
 		String INSERT_CART_SQL = "INSERT INTO CART(ID) VALUES (:id)";
@@ -32,16 +46,7 @@ public class MariaCartRepository implements CartRepository {
 		cartParams.put("id", cartDto.getId());
 		jdbcTempleate.update(INSERT_CART_SQL, cartParams);
 		cartDto.getCartItems().stream().forEach(cartItemDto -> {
-			Product productById = productService.getProductById(cartItemDto.getProductId());
-			String INSERT_CART_ITEM_SQL = "INSERT INTO " + "CART_ITEM(ID,PRODUCT_ID,CART_ID,QUANTITY) "
-					+ "VALUES (:id, :product_id, :cart_id, :quantity)";
-
-			Map<String, Object> cartItemsParams = new HashMap<String, Object>();
-			cartItemsParams.put("id", cartItemDto.getId());
-			cartItemsParams.put("product_id", productById.getProductId());
-			cartItemsParams.put("cart_id", cartDto.getId());
-			cartItemsParams.put("quantity", cartItemDto.getQuantity());
-			jdbcTempleate.update(INSERT_CART_ITEM_SQL, cartItemsParams);
+			insertCartItem(cartItemDto, cartDto.getId());
 		});
 	}
 
@@ -58,20 +63,40 @@ public class MariaCartRepository implements CartRepository {
 		}
 	}
 
+	// @formatter:off
+	/**
+	 * 
+	 */
 	@Override
-	public void update(String id, CartDto cartDto) {
+	public void update(String id, CartDto cartDto) 
+			throws DataAccessException {
 		List<CartItemDto> cartItems = cartDto.getCartItems();
 		for (CartItemDto cartItem : cartItems) {
-			String SQL = "UPDATE CART_ITEM SET QUANTITY = :quantity, " + "PRODUCT_ID = :productId "
-					+ "WHERE ID = :id AND CART_ID = :cartId";
+			String SQL = "select count(*) from cart_item ci "
+					+ "where ci.ID = :ID";
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("id", cartItem.getId());
-			params.put("quantity", cartItem.getQuantity());
-			params.put("productId", cartItem.getProductId());
-			params.put("cartId", id);
-			jdbcTempleate.update(SQL, params);
+			
+			params.put("ID", cartItem.getId());
+			
+			int count = jdbcTempleate.queryForObject(SQL, params, Integer.class);
+			
+			if (jdbcTempleate.queryForObject(SQL, params, Integer.class) == 0) {
+				insertCartItem(cartItem, id);
+			} else {
+				SQL = "UPDATE CART_ITEM SET "
+						+ "QUANTITY = QUANTITY + :quantity, " 
+						+ "PRODUCT_ID = :productId "
+						+ "WHERE ID = :id AND CART_ID = :cartId";
+				params.clear();
+				params.put("id", cartItem.getId());
+				params.put("quantity", cartItem.getQuantity());
+				params.put("productId", cartItem.getProductId());
+				params.put("cartId", id);
+				jdbcTempleate.update(SQL, params);
+			}
 		}
 	}
+	// @formatter:on
 
 	@Override
 	public void delete(String id) {
