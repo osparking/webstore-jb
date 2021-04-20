@@ -2,8 +2,8 @@ package com.jbpark.webstore.domain.repository;
 
 import java.util.List;
 
-import com.jbpark.webstore.domain.User;
+import com.jbpark.webstore.domain.UserWS;
 
 public interface UserRepository {
-	List<User> getAllUsers();
+	List<UserWS> getAllUsers();
 }

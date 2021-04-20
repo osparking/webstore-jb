@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.jbpark.webstore.domain.User;
+import com.jbpark.webstore.domain.UserWS;
 import com.jbpark.webstore.service.UserService;
 
 @Configuration
@@ -24,8 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-		List<User> users = userService.getAllUsers();
-		for (User u : users) {
+		List<UserWS> users = userService.getAllUsers();
+		for (UserWS u : users) {
 			if ("admin".equals(u.getUsername())) {
 				auth.inMemoryAuthentication().withUser(u.getUsername()).password(u.getPassword()).roles("USER",
 						"ADMIN");
