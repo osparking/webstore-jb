@@ -94,10 +94,10 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Product(String productId, String pname, BigDecimal unitPrice) {
+	public Product(String productId, String pname, int unitPrice) {
 		this.productId = productId;
 		this.name = pname;
-		this.setUnitPrice(unitPrice);
+		this.unitPrice = new BigDecimal(unitPrice);
 	}
 
 	public String getProductId() {
