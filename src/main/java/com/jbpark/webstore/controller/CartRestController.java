@@ -30,7 +30,9 @@ public class CartRestController {
 	@RequestMapping(value = "/{cartId}", method = RequestMethod.GET)
 	public Cart read(@PathVariable(value = "cartId") String cartId) {
 		Cart cart = cartService.read(cartId);
-		cart.updateGrandTotal();
+		if (cart != null) {
+			cart.updateGrandTotal();
+		}
 		return cart;
 	}
 
