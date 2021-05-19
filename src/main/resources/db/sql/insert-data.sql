@@ -1,10 +1,10 @@
 INSERT INTO ADDRESS VALUES (
-	1, '01020', 'ì„œìš¸ì‹œ', 'ì¢…ë¡œêµ¬', 'ì¢…ë¡œ2ê°€100ê¸¸', '15', '501í˜¸');
+	1, '01020', '¼­¿ï½Ã', 'Á¾·Î±¸', 'Á¾·Î2°¡100±æ', '15', '501È£');
 INSERT INTO ADDRESS VALUES (
-	2, '02040', 'ë¶€ì‚°ì‹œ', 'ì˜ë„êµ¬', 'ì˜ë„ëŒ€ë¡œ7ë¡œ56ê¸¸', '64', '101ë™309í˜¸');
-INSERT INTO CUSTOMERS VALUES (10, 'ì´ìƒí˜¸', '010-2324-2345', 1, 1, 'ê°•ì›ë„ íƒœë°±ì‹œ ë¬¸ë™ë©´ 100ë²ˆì§€');
-INSERT INTO CUSTOMERS VALUES (11, 'ë°•ì°¬í˜¸', '010-5555-9898', 2, 0, 'ì„¸ì¢…ì‹œ ì„¸ì¢…ëŒ€ë¡œ 15ë¡œ 103ë™ 1105í˜¸');
+	2, '02040', 'ºÎ»ê½Ã', '¿µµµ±¸', '¿µµµ´ë·Î7·Î56±æ', '64', '101µ¿309È£');
 
+INSERT INTO CUSTOMERS VALUES (10, 'ÀÌ»óÈ£', '010-2324-2345', 1, 1, '°­¿øµµ ÅÂ¹é½Ã ¹®µ¿¸é 100¹øÁö');
+INSERT INTO CUSTOMERS VALUES (11, '¹ÚÂùÈ£', '010-5555-9898', 2, 0, '¼¼Á¾½Ã ¼¼Á¾´ë·Î 15·Î 103µ¿ 1105È£');
 
 INSERT INTO PRODUCTS VALUES ('P1234',
 'iPhone 6s',
@@ -24,12 +24,3 @@ INSERT INTO PRODUCTS VALUES ('P1236',
 quad-core Qualcomm Snapdragon?S4 Pro
 processor',
 300,'Google','Tablet','New',1000,0,false);
-
-INSERT INTO customers VALUES (
-  'C001', 'Park', 'Seoul', 1);
-  
-INSERT INTO customers VALUES (
-  'C002', 'ê¹€ê¸¸ë™', 'ë¶€ì‚°ì‹œ', 100);
-  
-INSERT INTO customers VALUES (
-  'C003', 'ìµœìˆ™ìž', 'ì¶©ì²­ë„', 10000);
