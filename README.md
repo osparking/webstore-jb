@@ -8,5 +8,8 @@
 - 톰캣: 9.0
 - DBeaver - Git 1.0.0
 - Maven 3.8.1
-- MariaDB: 서버 5.5.57
-- JDK 8.0
+- MariaDB: 서버 10.5.9
+  - database: webstore, user: tester, password: 1234 
+    - : [User creation info](https://docs.google.com/document/d/1N95IdGkGqIL5-OpxekYhkmm29anpk9FEWNQQumgSfLc/edit?usp=sharing)
+  - table creation and record insertion : 2 sql files
+- JDK 8.0+
